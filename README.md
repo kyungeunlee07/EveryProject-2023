@@ -19,4 +19,4 @@
 #### - 이경은: @kyungeunlee07
 #### - 김연진: @homebdy
 #### - 이창근: @
-#### - 정한철: @
+#### - 정한철: @HancheolJeong
