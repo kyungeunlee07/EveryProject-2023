@@ -4,7 +4,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
-import '../../widget/FriendProfile.dart';
+import '../../widget/friend/FriendProfile.dart';
+import '../../widget/friend/FriendButton.dart';
+import '../../widget/friend/FriendInfo.dart';
 
 class FriendDetail extends StatelessWidget {
   const FriendDetail({super.key});
@@ -36,7 +38,7 @@ class FriendDetail extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
-                FriendProfile(),
+                FriendInfo(),
                 SizedBox(height: 20),
                 Divider(thickness: 1, color: Color.fromARGB(255, 230, 54, 41)),
                 SizedBox(height: 10),
