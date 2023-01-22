@@ -6,7 +6,7 @@ class FriendProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

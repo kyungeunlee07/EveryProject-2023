@@ -1,3 +1,4 @@
+import 'package:app/src/screen/friend/FriendDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,7 +14,12 @@ class FriendList extends StatefulWidget {
 class _FriendListState extends State<FriendList> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const FriendDetail()),
+      );
+    }, child: Container(
       child: ListView.builder(itemBuilder: ((context, index) {
         return Column(
           children: [
@@ -21,8 +27,9 @@ class _FriendListState extends State<FriendList> {
                 width: double.infinity,
                 height: 90,
                 child: Row(children: [
+                  SizedBox(width: 10),
                   FriendProfile(),
-                  SizedBox(width: 105),
+                  SizedBox(width: 125),
                   Column(
                     children: [
                       SizedBox(height: 10),
@@ -44,6 +51,6 @@ class _FriendListState extends State<FriendList> {
           ],
         );
       })),
-    );
+    ));
   }
 }
