@@ -13,13 +13,12 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: EdgeInsets.symmetric(vertical: 160, horizontal: 30),
         child: Form(
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 180),
                 const Text(
                   "대학 생활을 더 편하고 즐겁게",
                   style: TextStyle(

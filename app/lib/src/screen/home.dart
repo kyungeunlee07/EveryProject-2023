@@ -1,4 +1,5 @@
 import 'package:app/src/screen/friend/FriendList.dart';
+import 'package:app/src/screen/user/UserProfile.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -18,7 +19,7 @@ class _Home extends State<Home> {
     Text('전체 글이 들어갈 곳'),
     Text('학과 카테고리 들어갈 곳'),
     FriendList(),
-    Text('사용자의 프로필이 들어갈 곳'),
+    UserProfile(),
   ];
 
   void _onItemTapped(int index) {
