@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Login.dart';
+import '../../repository/UserRepository.dart';
+import './Login.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
+
+  @override
+  State<Register> createState() => _Register();
+}
+
+class _Register extends State<Register> {
+  final _formKey = GlobalKey<FormState>();
+  final _idController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _sidController = TextEditingController();
+  final _departmentController = TextEditingController();
+  final _userRepository = UserRepository();
+
+  void _submitButton() async {
+    final prefs = await SharedPreferences.getInstance();
+    String id = _idController.text;
+    String name = _nameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String sid = _sidController.text;
+    String department = _departmentController.text;
+    String? token = await _userRepository.register(
+        id, name, email, password, sid, department);
+    if (token != null) {
+      await prefs.setString('token', token);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (b) => Login()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +44,7 @@ class Register extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 160, horizontal: 30),
         child: Form(
+          key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -29,6 +64,107 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: 50),
                 TextFormField(
+                  controller: _idController,
+                  validator: (String? value) {
+                    if (value == null || value!.trim().isEmpty) {
+                      return "아이디를 입력해야 합니다.";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    labelText: "  아이디",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 233, 233, 233),
+                        width: 30,
+                      ),
+                    ),
+                    floatingLabelAlignment: FloatingLabelAlignment.start,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
+                    ),
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 233, 233, 233),
+                  ),
+                  cursorColor: Color.fromARGB(255, 230, 54, 41),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  obscureText: true,
+                  controller: _passwordController,
+                  validator: (String? value) {
+                    if (value == null || value!.trim().isEmpty) {
+                      return "비밀번호를 입력해야 합니다.";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    labelText: "  비밀번호",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 233, 233, 233),
+                        width: 30,
+                      ),
+                    ),
+                    floatingLabelAlignment: FloatingLabelAlignment.start,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
+                    ),
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 233, 233, 233),
+                  ),
+                  cursorColor: Color.fromARGB(255, 230, 54, 41),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: _nameController,
+                  validator: (String? value) {
+                    if (value == null || value!.trim().isEmpty) {
+                      return "이름을 입력해야 합니다.";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    labelText: "  이름",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 233, 233, 233),
+                        width: 30,
+                      ),
+                    ),
+                    floatingLabelAlignment: FloatingLabelAlignment.start,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
+                    ),
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 233, 233, 233),
+                  ),
+                  cursorColor: Color.fromARGB(255, 230, 54, 41),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: _emailController,
+                  validator: (String? value) {
+                    if (value == null || value!.trim().isEmpty) {
+                      return "이메일을 입력해야 합니다.";
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     labelText: "  이메일",
                     labelStyle: TextStyle(color: Colors.grey),
@@ -60,11 +196,18 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
-                  obscureText: true,
+                  controller: _sidController,
                   decoration: const InputDecoration(
-                    labelText: "  비밀번호",
+                    labelText: "  학번",
                     labelStyle: TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 233, 233, 233),
+                        width: 30,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                       borderSide: BorderSide(
                         color: Color.fromARGB(255, 233, 233, 233),
@@ -85,11 +228,18 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
-                  obscureText: true,
+                  controller: _departmentController,
                   decoration: const InputDecoration(
-                    labelText: "  이름",
+                    labelText: "  학과",
                     labelStyle: TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 233, 233, 233),
+                        width: 30,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                       borderSide: BorderSide(
                         color: Color.fromARGB(255, 233, 233, 233),
@@ -110,10 +260,7 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
+                  onPressed: _submitButton,
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(400, 50),
                       backgroundColor: Color.fromARGB(255, 230, 54, 41),
