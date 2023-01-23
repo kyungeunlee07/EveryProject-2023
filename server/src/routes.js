@@ -4,6 +4,7 @@ const { myLogging} = require('./middleware/logging');
 const webController = require('./web/controller')
 const apiUserController = require('./api/user/controller');
 const apiFeedController = require('./api/feed/controller');
+const apicommentController = require('./api/comment/controller');
 const {verify} = require('./middleware/auth');
 const multer = require('@koa/multer');
 const path = require('path');
@@ -35,5 +36,14 @@ router.post('/api/feed', apiFeedController.store);
 router.get('/api/feed/:id', apiFeedController.show);
 router.put('/api/feed/:id', apiFeedController.update);
 router.delete('/api/feed/:id', apiFeedController.delete);
+
+
+/**
+ * feed, comment
+ */
+router.get('/api/comment', apicommentController.index);
+router.post('/api/comment', apicommentController.store);
+router.put('/api/comment/:id', apicommentController.update);
+router.delete('/api/comment/:id', apicommentController.delete);
 
 module.exports = router;
