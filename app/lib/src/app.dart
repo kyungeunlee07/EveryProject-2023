@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screen/user/Login.dart';
 import 'screen/home.dart';
+import 'screen/user/Login.dart';
 
 class MyApp extends StatelessWidget {
   String? token;
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'NanumGothic',
         primaryColor: const Color.fromARGB(255, 230, 54, 41),
       ),
-      home: Home(),
+      home: (token == null) ? Login() : Home(),
     );
   }
 }

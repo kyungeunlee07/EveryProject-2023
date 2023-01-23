@@ -1,20 +1,44 @@
-import 'package:app/src/screen/user/Register.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app/src/screen/user/Register.dart';
+import '../../repository/LoginRepository.dart';
+import '../../style/user/TextFormFieldStyle.dart';
+import '../home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Login> createState() => _Login();
 }
 
-class _LoginState extends State<Login> {
+class _Login extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _loginRepository = LoginRepository();
+
+  void _submitButton() async {
+    final prefs = await SharedPreferences.getInstance();
+    String id = _idController.text;
+    String password = _passwordController.text;
+
+    String? token = await _loginRepository.login(
+        id, password);
+    if (token != null) {
+      await prefs.setString('token', token);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (b) => Home()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 160, horizontal: 30),
         child: Form(
+          key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -34,63 +58,22 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: 50),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "  아이디",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  controller: _idController,
+                  decoration: TextFormFieldStyle("아이디"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: "  비밀번호",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("비밀번호"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _submitButton,
                   style: ElevatedButton.styleFrom(
                       fixedSize: const Size(400, 50),
                       backgroundColor: Color.fromARGB(255, 230, 54, 41),
