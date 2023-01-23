@@ -17,7 +17,7 @@ class _Home extends State<Home> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Register(),
+    Text('전체 글 목록'),
     Text('학과 카테고리 들어갈 곳'),
     FriendList(),
     UserProfile(),

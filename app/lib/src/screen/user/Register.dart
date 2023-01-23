@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Login.dart';
 import '../../repository/UserRepository.dart';
-import './Login.dart';
+import '../../style/user/TextFormFieldStyle.dart';
+import 'Login.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -71,25 +71,7 @@ class _Register extends State<Register> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: "  아이디",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("아이디"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -103,25 +85,7 @@ class _Register extends State<Register> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: "  비밀번호",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("비밀번호"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -134,25 +98,7 @@ class _Register extends State<Register> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: "  이름",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("이름"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -165,96 +111,21 @@ class _Register extends State<Register> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: "  이메일",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("이메일"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(height: 10),
                 TextFormField(
                   controller: _sidController,
-                  decoration: const InputDecoration(
-                    labelText: "  학번",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("학번"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 10),
                 TextFormField(
                   controller: _departmentController,
-                  decoration: const InputDecoration(
-                    labelText: "  학과",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 233, 233, 233),
-                        width: 30,
-                      ),
-                    ),
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 233, 233, 233)),
-                    ),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 233, 233, 233),
-                  ),
+                  decoration: TextFormFieldStyle("학과"),
                   cursorColor: Color.fromARGB(255, 230, 54, 41),
                   keyboardType: TextInputType.emailAddress,
                 ),
