@@ -23,22 +23,22 @@ router.get('/page/:page', webController.page);
 /**
  * member, friends, friend_request
  */
-router.get('/api/user/:id', apiUserController.info);
+router.post('/api/user', apiUserController.info);
 router.post('/api/user/register', apiUserController.register);
 router.post('/api/user/login', apiUserController.login);
-router.delete('/api/user/delete/:id', apiUserController.del);
+router.post('/api/user/delete', apiUserController.del);
 
-router.get('/api/friend/show/:id', apifriendController.show)
+router.post('/api/friend/show', apifriendController.show)
 router.post('/api/friend/insert', apifriendController.insert);
 router.post('/api/friend/del', apifriendController.del);
 
-router.get('/api/request/show/received/:id', apirequestController.show_request_received);
-router.get('/api/request/show/sent/:id', apirequestController.show_request_sent);
+router.post('/api/request/show/received', apirequestController.show_request_received);
+router.post('/api/request/show/sent', apirequestController.show_request_sent);
 router.post('/api/request/insert', apirequestController.insert);
 router.post('/api/request/del', apirequestController.del);
 
-router.get('/api/tag/show/:id', apitagController.show);
-router.get('/api/tag/show/count/:id', apitagController.show_count);
+router.post('/api/tag/show', apitagController.show);
+router.post('/api/tag/show/count', apitagController.show_count);
 router.post('/api/tag/check', apitagController.check);
 router.post('/api/tag/insert', apitagController.insert);
 

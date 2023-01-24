@@ -3,7 +3,8 @@ const {pool} = require('../../data')
 exports.info = async (id) => {
     const query = `SELECT id, name, sid, department, email
     FROM member WHERE id = ?`;
-    return await pool(query, [id]);
+    let result = await pool(query, [id]);
+    return (result.length < 0)? null : { item : result};
 }
 
 exports.register = async (id, pw, name, sid, department, email) => {

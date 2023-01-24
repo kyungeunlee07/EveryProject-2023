@@ -36,12 +36,13 @@ exports.del = async (ctx, next) => {
     }
 }
 
+//친구 목록
 exports.show = async (ctx, next) => {
 
-    let id = ctx.params.id;
+    let {id} = ctx.request.body;
 
     let {item} = await show(id);
-
+    
     if(item == null)
     {
         ctx.body = {result: "fail"};

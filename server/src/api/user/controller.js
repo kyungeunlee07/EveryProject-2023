@@ -3,7 +3,7 @@ const {register, login, del, info} = require('./query');
 const crypto = require('crypto');
 
 exports.info = async (ctx, next) => {
-    let id = ctx.params.id;
+    let {id} = ctx.request.body;
 
     let {item} = await info(id);
 
@@ -62,7 +62,7 @@ exports.login = async (ctx, next) => {
 //삭제
 exports.del = async (ctx, next) => {
 
-    let id = ctx.params.id;
+    let {id} = ctx.request.body;
 
     let {affectedRows} = await del(id);
 

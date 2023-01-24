@@ -41,7 +41,7 @@ exports.del = async (ctx, next) => {
 //친구요청 받은 목록
 exports.show_request_received = async (ctx, next) => {
 
-    let id = ctx.params.id;
+    let {id} = ctx.request.body;
 
     let {item} = await show_request_received(id);
 
@@ -59,7 +59,7 @@ exports.show_request_received = async (ctx, next) => {
 //친구요청 신청 목록
 exports.show_request_sent = async (ctx, next) => {
 
-    let id = ctx.params.id;
+    let {id} = ctx.request.body;
 
     let {item} = await show_request_sent(id);
 

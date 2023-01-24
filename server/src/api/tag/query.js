@@ -13,8 +13,8 @@ exports.insert = async (comment_id, friend) => {
 
 // 태그 불러오기
 exports.show = async(id) => {
-    const query = `SELECT l.comment_id AS comment_id, l.board_id AS board_id, l.comment_name AS comment_name, l.comment_content AS comment_content, r.m_name AS board_name, b_title AS board_title 
-    FROM (SELECT c.id AS comment_id, c.board AS board_id, c.name AS comment_name, c.content AS comment_content FROM (SELECT * FROM tag WHERE friend = ?) AS t 
+    const query = `SELECT l.comment_id AS comment_id, l.board_id AS board_id, l.comment_name AS comment_name, l.comment_content AS comment_content, r.m_name AS board_name, r.b_title AS board_title, l.checked AS checked, l.tag_id AS tag_id
+    FROM (SELECT c.id AS comment_id, c.board AS board_id, c.name AS comment_name, c.content AS comment_content, t.id AS tag_id, t.checked AS checked FROM (SELECT * FROM tag WHERE friend = ?) AS t 
     LEFT JOIN (SELECT member.name AS name, comment.id AS id, comment.board AS board, comment.content AS content, comment.writer AS writer FROM comment LEFT JOIN member ON comment.writer = member.id) AS c ON t.comment_id = c.id)
     AS l LEFT JOIN (SELECT member.name AS m_name, board.title AS b_title, board.id AS b_id FROM board LEFT JOIN member ON board.writer = member.id) AS r ON l.board_id = r.b_id`
     let result = await pool(query, [id]);
