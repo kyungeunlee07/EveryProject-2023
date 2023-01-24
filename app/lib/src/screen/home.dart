@@ -1,5 +1,7 @@
 import 'package:app/src/screen/friend/FriendList.dart';
 import 'package:app/src/screen/user/UserProfile.dart';
+import 'package:app/src/screen/Writings/WritingsList.dart';
+import 'package:app/src/screen/department/DepartmentList.dart';
 import 'package:app/src/screen/user/Register.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,12 +19,11 @@ class _Home extends State<Home> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('전체 글 목록'),
-    Text('학과 카테고리 들어갈 곳'),
+    WritingsList(),
+    DepartmentList(),
     FriendList(),
     UserProfile(),
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
