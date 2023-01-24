@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../repository/UserRepository.dart';
+import '../../repository/user/UserRepository.dart';
 import '../../style/user/TextFormFieldStyle.dart';
 import 'Login.dart';
 

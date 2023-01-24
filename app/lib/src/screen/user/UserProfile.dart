@@ -1,10 +1,11 @@
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import '../../widget/user/MyProfile.dart';
 import '../../widget/user/UpdateProfileButton.dart';
+import 'package:app/src/repository/user/ProfileRepository.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -14,7 +15,8 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
         body: Container(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
+            child: SingleChildScrollView(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -42,6 +44,6 @@ class UserProfile extends StatelessWidget {
                 SizedBox(height: 10),
                 Text("작성글이 들어갈 부분"),
               ],
-            )));
+            ))));
   }
 }

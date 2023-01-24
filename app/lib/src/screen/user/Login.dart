@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app/src/screen/user/Register.dart';
-import '../../repository/LoginRepository.dart';
+import '../../repository/user/LoginRepository.dart';
 import '../../style/user/TextFormFieldStyle.dart';
 import '../home.dart';
 
@@ -23,8 +23,7 @@ class _Login extends State<Login> {
     String id = _idController.text;
     String password = _passwordController.text;
 
-    String? token = await _loginRepository.login(
-        id, password);
+    String? token = await _loginRepository.login(id, password);
     if (token != null) {
       await prefs.setString('token', token);
       Navigator.pushReplacement(

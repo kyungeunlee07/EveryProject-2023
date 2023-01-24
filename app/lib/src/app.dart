@@ -16,6 +16,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'NanumGothic',
           primaryColor: const Color.fromARGB(255, 230, 54, 41),
         ),
-        home: Home());
+        home: Login());
   }
 }
