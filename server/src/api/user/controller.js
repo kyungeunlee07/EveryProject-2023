@@ -1,11 +1,23 @@
 const jwt = require('jsonwebtoken');
-const {register, login, del} = require('./query');
+const {register, login, del, info} = require('./query');
 const crypto = require('crypto');
 
-exports.info = (ctx, next) => {
+exports.info = async (ctx, next) => {
     let id = ctx.params.id;
-    ctx.body = `${id} 회원에 대한 정보`;
+
+    let {item} = await info(id);
+
+    if(item == null)
+    {
+        ctx.body = {result: "fail"};
+    }
+    else
+    {
+        ctx.body = {result:"success", values : item}
+    }
 }
+
+
 
 //회원가입
 exports.register = async (ctx, next) => {
@@ -41,7 +53,7 @@ exports.login = async (ctx, next) => {
     }
     else
     {
-        let token = {result : "success"};
+        let token = {result : "success", values: item};
         ctx.body = token;
     }
 

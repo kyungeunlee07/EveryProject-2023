@@ -32,10 +32,10 @@ router.get('/api/friend/show/:id', apifriendController.show)
 router.post('/api/friend/insert', apifriendController.insert);
 router.post('/api/friend/del', apifriendController.del);
 
-router.post('/api/request/insert', apirequestController.insert);
-router.post('/api/request/del', apirequestController.del);
 router.get('/api/request/show/received/:id', apirequestController.show_request_received);
 router.get('/api/request/show/sent/:id', apirequestController.show_request_sent);
+router.post('/api/request/insert', apirequestController.insert);
+router.post('/api/request/del', apirequestController.del);
 
 router.get('/api/tag/show/:id', apitagController.show);
 router.get('/api/tag/show/count/:id', apitagController.show_count);
