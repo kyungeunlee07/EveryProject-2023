@@ -28,6 +28,8 @@ router.post('/api/user', apiUserController.info);
 router.post('/api/user/register', apiUserController.register);
 router.post('/api/user/login', apiUserController.login);
 router.post('/api/user/delete', apiUserController.del);
+router.post('/api/user/show_intro', apiUserController.show_intro);
+router.post('/api/user/update_intro', apiUserController.update_intro);
 
 router.post('/api/friend/show', apifriendController.show)
 router.post('/api/friend/insert', apifriendController.insert);

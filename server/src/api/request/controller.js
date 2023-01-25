@@ -43,7 +43,7 @@ exports.show_request_received = async (ctx, next) => {
 
     let {id} = ctx.request.body;
 
-    let {item} = await show_request_received(id);
+    let item = await show_request_received(id);
 
     if(item == null)
     {
@@ -61,7 +61,7 @@ exports.show_request_sent = async (ctx, next) => {
 
     let {id} = ctx.request.body;
 
-    let {item} = await show_request_sent(id);
+    let item = await show_request_sent(id);
 
     if(item == null)
     {

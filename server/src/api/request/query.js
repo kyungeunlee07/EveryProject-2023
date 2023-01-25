@@ -24,12 +24,12 @@ exports.del = async(id) => {
 exports.show_request_received = async(id) => {
     const query = `SELECT * FROM (SELECT id, name, sid, department, email FROM member) AS tbl WHERE id IN (SELECT sender_id FROM friend_request WHERE receiver_id = ?)`
     let result = await pool(query, [id]);
-    return (result.length < 0)? null : { item : result};
+    return (result.length == 0)? null : { item : result};
 }
 
 // 자신의 친구 요청 신청한 리스트
 exports.show_request_sent = async(id) => {
     const query = `SELECT * FROM (SELECT id, name, sid, department, email FROM member) AS tbl WHERE id IN (SELECT receiver_id FROM friend_request WHERE sender_id = ?)`
     let result = await pool(query, [id]);
-    return (result.length < 0)? null : { item : result};
+    return (result.length == 0)? null : { item : result};
 }

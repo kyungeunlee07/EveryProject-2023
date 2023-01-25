@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
-const {register, login, del, info} = require('./query');
+const {register, login, del, info, show_intro, update_intro} = require('./query');
 const crypto = require('crypto');
 
 exports.info = async (ctx, next) => {
     let {id} = ctx.request.body;
 
-    let {item} = await info(id);
+    let item = await info(id);
 
     if(item == null)
     {
@@ -77,6 +77,37 @@ exports.del = async (ctx, next) => {
 
 }
 
+exports.show_intro = async (ctx, next) => {
+    let {id} = ctx.request.body;
+
+    let item = await show_intro(id);
+
+    if(item == null)
+    {
+        ctx.body = {result: "fail"};
+    }
+    else
+    {
+        ctx.body = {result:"success", values : item}
+    }
+}
+
+exports.update_intro = async (ctx, next) => {
+
+    let {id, introduction} = ctx.request.body;
+
+    let {affectedRows} = await update_intro(id, introduction);
+
+    if(affectedRows > 0)
+    {
+        ctx.body = {result: "success"};
+    }
+    else
+    {
+        ctx.body = {result: "fail"};
+    }
+
+}
 
 
 let generteToken = (payload)=>{

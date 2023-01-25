@@ -25,6 +25,6 @@ exports.show = async(id) => {
     UNION ALL
     (SELECT user2_id as friend FROM friends WHERE user1_id = ?))`
     let result = await pool(query, [id, id]);
-    return (result.length < 0)? null : { item : result};
+    return (result.length == 0)? null : result;
 }
 
