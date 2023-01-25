@@ -6,6 +6,7 @@ const apiUserController = require('./api/user/controller');
 const apifriendController = require('./api/friend/controller');
 const apirequestController = require('./api/request/controller');
 const apitagController = require('./api/tag/controller');
+const apiBoardController = require('./api/board/controller');
 const apiFeedController = require('./api/feed/controller');
 const apicommentController = require('./api/comment/controller');
 const {verify} = require('./middleware/auth');
@@ -47,16 +48,18 @@ router.post('/file/upload', upload.single('file'), require('./api/file/controlle
 router.get('/file/:id', require('./api/file/controller').download);
 
 
-//router.use(verify);
+//board
+router.get('./api/board', apiBoardController.index);
+
+//feed;
 router.get('/api/feed', apiFeedController.index);
 router.post('/api/feed', apiFeedController.store);
 router.get('/api/feed/:id', apiFeedController.show);
 router.put('/api/feed/:id', apiFeedController.update);
 router.delete('/api/feed/:id', apiFeedController.delete);
 
-
 /**
- * feed, comment
+ * comment
  */
 router.get('/api/comment', apicommentController.index);
 router.post('/api/comment', apicommentController.store);

@@ -8,7 +8,8 @@ exports.index = async (ctx, next)=>{
 
     if(item == null)
     {
-        ctx.body = {result: "fail"};
+        ctx.body = 200; //댓글 내용이 없을 경우
+        ctx.body = {result: "댓글 불러오기 실패"};
     }
     else
     {
@@ -27,7 +28,8 @@ exports.update = async (ctx, next) => {
     }
     else
     {
-        ctx.body = {result:"fail"};
+        ctx.status = 201;
+        ctx.body = {result:"댓글 수정 실패"};
     }
 }
 
@@ -41,7 +43,8 @@ exports.delete = async (ctx, next) => {
     }
     else
     {
-        ctx.body = {result:"fail"};
+        ctx.status = 202;
+        ctx.body = {result:"댓글 삭제 실패"}; 
     }
 }
 
@@ -57,7 +60,8 @@ exports.store = async (ctx, next) => {
     }
     else
     {
-        ctx.body = {result:"fail"};
+        ctx.status = 203;
+        ctx.body = {result:"댓글 작성 실패"};
     }
 }
 

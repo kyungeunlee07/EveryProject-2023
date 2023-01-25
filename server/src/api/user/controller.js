@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const {register, login, del, info} = require('./query');
 const crypto = require('crypto');
+const GetIntrinsic = require('get-intrinsic');
 
 exports.info = async (ctx, next) => {
     let {id} = ctx.request.body;
@@ -30,7 +31,7 @@ exports.register = async (ctx, next) => {
 
     if(affectedRows> 0)
     {
-        let token = await generteToken({name});
+        let token = await generteToken({name, id: insertId});
         ctx.body = {result: "success", id: id};
     }
     else
@@ -49,11 +50,11 @@ exports.login = async (ctx, next) => {
 
     if(item == null)
     {
-        ctx.body = {result: "fail"};
+        ctx.body = {result: "아이디 혹은 비밀번호가 맞지 않습니다."};
     }
     else
     {
-        let token = {result : "success", values: item};
+        let token = await generateToken({name: item.name, id: item.id});
         ctx.body = token;
     }
 
@@ -77,8 +78,7 @@ exports.del = async (ctx, next) => {
 
 }
 
-
-
+//페이로드 토큰 생성
 let generteToken = (payload)=>{
     return new Promise((resolve, reject)=> {
         jwt.sign(payload, process.env.APP_KEY, (error, token) => {
