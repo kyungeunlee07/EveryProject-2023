@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:app/src/repository/user/ProfileRepository.dart';
 import 'package:app/src/model/Profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -16,11 +18,16 @@ class _MyProfileState extends State<MyProfile> {
   List<Profile> profile = [];
 
   void loadData() async {
-    profile = await _profileRepository.profile('d');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    if (token == null) return;
+    Map<String, dynamic> user = jsonDecode(token);
+    profile = await _profileRepository.profile(user['values']['id']);
   }
 
   @override
   Widget build(BuildContext context) {
+    loadData();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Column(
