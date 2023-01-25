@@ -39,7 +39,7 @@ exports.show = async (ctx, next) => {
 
     let {id} = ctx.request.body;
 
-    let {item} = await show(id);
+    let item = await show(id);
 
     if(item == null)
     {
@@ -55,7 +55,7 @@ exports.show_count = async (ctx, next) => {
 
     let {id} = ctx.request.body;
 
-    let {item} = await show_count(id);
+    let item = await show_count(id);
 
     if(item == null)
     {
