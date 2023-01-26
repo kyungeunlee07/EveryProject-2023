@@ -6,7 +6,7 @@ import '../../model/Friend.dart';
 import 'FriendButton.dart';
 
 class FriendInfo extends StatelessWidget {
-  Friend friend;
+  FriendModel friend;
   FriendInfo(this.friend, {super.key});
   @override
   Widget build(BuildContext context) {

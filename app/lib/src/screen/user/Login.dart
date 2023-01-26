@@ -28,6 +28,7 @@ class _Login extends State<Login> {
     String password = _passwordController.text;
 
     String? token = await userController.login(id, password);
+
     if (token == null) {
       Get.off(() => const Home());
     } else {

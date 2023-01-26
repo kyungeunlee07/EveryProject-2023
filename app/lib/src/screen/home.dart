@@ -5,6 +5,7 @@ import 'package:app/src/screen/department/DepartmentList.dart';
 import 'package:app/src/screen/user/Register.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 

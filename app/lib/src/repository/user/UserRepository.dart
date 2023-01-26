@@ -27,7 +27,6 @@ class UserRepository extends GetConnect {
         'department': department
       },
     );
-    print(response.body);
     return response.body;
   }
 

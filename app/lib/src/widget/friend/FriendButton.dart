@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class FriendButton extends StatefulWidget {
   const FriendButton({super.key});
-
+  final state = "";
   @override
   State<FriendButton> createState() => _FriendButtonState();
 }

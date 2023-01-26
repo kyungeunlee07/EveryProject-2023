@@ -1,15 +1,11 @@
-class FriendModel {
-  String? id;
+class ProfileModel {
   String? name;
   int? sid;
   String? department;
-  String? email;
 
-  FriendModel.parse(Map m) {
-    id = m['id'];
+  ProfileModel.parse(Map m) {
     name = m['name'];
     sid = m['sid'];
     department = m['department'];
-    email = m['email'];
   }
 }
