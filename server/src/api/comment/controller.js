@@ -1,4 +1,4 @@
-const {store, del, update} = require('./query');
+const { store, del, update} = require('./query');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 

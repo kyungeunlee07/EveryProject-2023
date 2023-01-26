@@ -1,13 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
 import 'package:app/src/widget/Writings/DeleteButton.dart';
-import '../../widget/Writings/WritingsProfile.dart';
 import '../../widget/Writings/UpdateButton.dart';
-import '../../widget/Writings/WritingsInfo.dart';
 import '../../widget/comment/commentContainer.dart';
 import '../../widget/comment/CommentInput.dart';
 

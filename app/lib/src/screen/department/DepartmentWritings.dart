@@ -38,7 +38,7 @@ class _DepartmentWritings extends State<DepartmentWritings> {
           textAlign: TextAlign.center,
         ),
         centerTitle: false,
-        backgroundColor: Color.fromARGB(255, 250, 250, 250),
+        backgroundColor: Color.fromARGB(0, 250, 250, 250),
         elevation: 0,
       ),
       body: Center(
