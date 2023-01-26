@@ -1,21 +1,8 @@
-const {store, show, del, update, index} = require('./query');
+const {store, del, update} = require('./query');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
-exports.index = async (ctx, next)=>{
-    ctx.body = "댓글 목록";
-    let item = await index();
-
-    if(item == null)
-    {
-        ctx.body = {result: "fail"};
-    }
-    else
-    {
-        ctx.body = {result: "success", items: item};
-    }
-}
-
+//댓글 수정하기
 exports.update = async (ctx, next) => {
     let id = ctx.params.id;
     let {content} = ctx.request.body;
@@ -29,8 +16,16 @@ exports.update = async (ctx, next) => {
     {
         ctx.body = {result:"fail"};
     }
+
+     //타인이 댓글을 수정할 경우
+     if(id !== item.id) {
+        ctx.status = 400;
+        ctx.body = {result: "fail", message: '자기가 쓴 댓글만 삭제할 수 있습니다.'};
+        return;
+      }
 }
 
+//댓글 삭제하기
 exports.delete = async (ctx, next) => {
     let id = ctx.params.id;
     let {affectedRows} = await del(id);
@@ -43,9 +38,17 @@ exports.delete = async (ctx, next) => {
     {
         ctx.body = {result:"fail"};
     }
+
+     //타인이 댓글을 삭제할 경우
+     if(id !== item.id) {
+        ctx.status = 400;
+        ctx.body = {result: "fail", message: '자기가 쓴 글만 삭제할 수 있습니다. '};
+        return;
+      }
 }
 
-exports.store = async (ctx, next) => {
+//댓글 작성하기
+exports.store = async (ctx, next) => { 
     // let token = await generteToken({name : 'my-name'});
     // ctx.body = token;
     let {id, content} = ctx.request.body;
