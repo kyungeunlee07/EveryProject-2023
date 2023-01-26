@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import '../../widget/user/MyProfile.dart';
 import '../../widget/user/UpdateProfileButton.dart';
-import 'package:app/src/repository/user/ProfileRepository.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});

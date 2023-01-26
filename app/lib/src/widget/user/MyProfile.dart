@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:app/src/controller/ProfileController.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/repository/user/ProfileRepository.dart';
-import 'package:app/src/model/Profile.dart';
+import 'package:app/src/model/ProfileModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+
+final profileController = ProfileController();
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -14,22 +17,24 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  final _profileRepository = ProfileRepository();
-  List<Profile> profile = [];
-  String name = '';
-  String department = '';
-  int sid = 0;
+  String? name = '';
+  String? department = '';
+  int? sid = 0;
 
   void onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('id');
-    print("token: $token");
     if (token == null) return;
-    profile = await _profileRepository.profile(token);
+    ProfileModel profile = await profileController.profileShow(token);
+    name = profile.name;
+    department = profile.department;
+    sid = profile.sid;
+  }
 
-    name = profile.first.name;
-    department = profile.first.department;
-    sid = profile.first.sid;
+  @override
+  void initState() {
+    super.initState();
+    onInit();
   }
 
   @override
@@ -51,13 +56,14 @@ class _MyProfileState extends State<MyProfile> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('$name', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('${name}',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 5),
-                  Text('$sid',
+                  Text('${sid}',
                       style:
                           TextStyle(color: Color.fromARGB(255, 114, 113, 113))),
                   SizedBox(height: 5),
-                  Text("$department"),
+                  Text("${department}"),
                 ],
               )
             ],

@@ -16,7 +16,6 @@ class UserController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     Map body =
         await userRepo.register(id, name, email, password, sid, department);
-    print(body);
     if (body['message'] == 'success') {
       prefs.setString('token', body['token']);
       return null;

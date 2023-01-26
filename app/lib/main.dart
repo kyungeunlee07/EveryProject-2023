@@ -6,6 +6,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString('token');
-  Stack s = new Stack();
   runApp(MyApp());
 }

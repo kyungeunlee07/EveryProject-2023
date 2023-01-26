@@ -1,21 +1,32 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:app/src/model/Profile.dart';
+import 'dart:io';
 
-class ProfileRepository {
-  var url = Uri.http('localhost:3000', 'api/user');
-  Future<List<Profile>> profile(String id) async {
-    List<Profile> myProfile = [];
-    var response = await http.post(url, body: {
-      'id': id,
+import 'package:get/get.dart';
+import 'package:app/src/controller/UserController.dart';
+
+import '../../shared/global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class ProfileRepository extends GetConnect {
+  final userController = Get.put(UserController());
+
+  @override
+  void onInit() {
+    allowAutoSignedCert = true;
+    httpClient.baseUrl = Global.API_ROOT;
+    httpClient.addRequestModifier<void>((request) {
+      request.headers['Accept'] = 'application/json';
+      return request;
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    if (response.statusCode == 200) {
-      myProfile = jsonDecode(response.body)['values'].map<Profile>((profile) {
-        return Profile.formMap(profile);
-      }).toList();
-    }
-    return myProfile;
+    super.onInit();
+  }
+
+  Future<Map> showMyProfile(String token) async {
+    Response response = await post(
+      "/api/user",
+      {'id': token},
+      headers: {'token': token},
+    );
+
+    return (response.statusCode == 200) ? response.body : null;
   }
 }
