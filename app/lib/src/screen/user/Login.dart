@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app/src/screen/user/Register.dart';
-import '../../repository/user/LoginRepository.dart';
+import '../../repository/user/UserRepository.dart';
+import '../../controller/UserController.dart';
 import '../../style/user/TextFormFieldStyle.dart';
 import '../home.dart';
+import 'package:get/get.dart';
+
+final userController = Get.put(UserController());
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,18 +20,18 @@ class _Login extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _loginRepository = LoginRepository();
+  final _userRepositort = UserRepository();
 
   void _submitButton() async {
     final prefs = await SharedPreferences.getInstance();
     String id = _idController.text;
     String password = _passwordController.text;
 
-    String? token = await _loginRepository.login(id, password);
-    if (token != null) {
-      await prefs.setString('token', token);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => Home()));
+    String? token = await userController.login(id, password);
+    if (token == null) {
+      Get.off(() => const Home());
+    } else {
+      Get.snackbar("로그인 에러", token, snackPosition: SnackPosition.BOTTOM);
     }
   }
 

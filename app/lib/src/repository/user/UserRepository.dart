@@ -1,23 +1,44 @@
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
-class UserRepository {
-  register(String id, String name, String email, String password, String sid,
-      String department) async {
-    var url = Uri.http('localhost:3000', 'api/user/register');
-    var response = await http.post(url, body: {
-      'id': id,
-      'name': name,
-      'email': email,
-      'pw': password,
-      'sid': sid,
-      'department': department
+import '../../shared/global.dart';
+
+class UserRepository extends GetConnect {
+  @override
+  void onInit() {
+    allowAutoSignedCert = true;
+    httpClient.baseUrl = Global.API_ROOT;
+    httpClient.addRequestModifier<void>((request) {
+      request.headers['Accept'] = 'application/json';
+      return request;
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      return null;
-    }
+    super.onInit();
+  }
+
+  Future<Map> register(String id, String name, String email, String password,
+      String sid, String department) async {
+    Response response = await post(
+      "/api/user/register",
+      {
+        'id': id,
+        'name': name,
+        'email': email,
+        'pw': password,
+        'sid': sid,
+        'department': department
+      },
+    );
+    print(response.body);
+    return response.body;
+  }
+
+  Future<Map> login(String id, String password) async {
+    Response response = await post(
+      "/api/user/login",
+      {
+        'id': id,
+        'pw': password,
+      },
+    );
+    return response.body;
   }
 }
