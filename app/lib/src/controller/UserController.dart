@@ -14,11 +14,9 @@ class UserController extends GetxController {
 
   Future<String?> register(String id, String name, String email,
       String password, String sid, String department) async {
-    final prefs = await SharedPreferences.getInstance();
     Map body =
         await userRepo.register(id, name, email, password, sid, department);
     if (body['message'] == 'success') {
-      prefs.setString('token', body['token']);
       return null;
     } else {
       return body['message'];
@@ -30,6 +28,8 @@ class UserController extends GetxController {
     Map body = await userRepo.login(email, password);
     if (body['result'] == 'success') {
       prefs.setString('token', body['token']);
+      print(body);
+      print(prefs.getString('token'));
       return null;
     } else {
       return body['result'];

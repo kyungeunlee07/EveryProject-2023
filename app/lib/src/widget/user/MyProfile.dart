@@ -22,10 +22,7 @@ class _MyProfileState extends State<MyProfile> {
   int? sid = 0;
 
   void onInit() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('id');
-    if (token == null) return;
-    ProfileModel profile = await profileController.profileShow(token);
+    ProfileModel profile = await profileController.profileShow();
     name = profile.name;
     department = profile.department;
     sid = profile.sid;

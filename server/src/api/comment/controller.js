@@ -51,8 +51,11 @@ exports.delete = async (ctx, next) => {
 exports.store = async (ctx, next) => { 
     // let token = await generteToken({name : 'my-name'});
     // ctx.body = token;
-    let {id, content} = ctx.request.body;
-    let {affectedRows} = await store(id, content);
+    let writer = "rladuswls010";
+    console.log(writer);
+    let board = 1;
+    let {content} = ctx.request.body;
+    let {affectedRows} = await store(board, writer, content);
 
     if(affectedRows> 0)
     {

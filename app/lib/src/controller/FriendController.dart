@@ -4,20 +4,23 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:app/src/model/Friend.dart';
 import 'package:app/src/repository/friend/FriendRepository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../token/decodeToken.dart';
 
 class FriendController extends GetxController {
   final friendRepo = Get.put(FriendRepository());
   List friendList = [];
 
   Future<bool> friendIndex(String id) async {
-    List? body = await friendRepo.showFriendList(id);
-    print(body);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    if (token == null) return false;
+    List? body = await friendRepo.showFriendList(parseJwtPayLoad(token)['id']);
     if (body == null) {
       return false;
     }
     List friend = body.map(((e) => FriendModel.parse(e))).toList();
     friendList = friend;
-    print(friendList.length);
     update();
     return true;
 

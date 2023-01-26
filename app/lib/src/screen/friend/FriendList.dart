@@ -29,7 +29,7 @@ class _FriendListState extends State<FriendList> {
     var token = prefs.getString('id');
     if (token == null) return;
     bool result = await friendController.friendIndex(token);
-    print(result);
+    print(token);
   }
 
   @override
