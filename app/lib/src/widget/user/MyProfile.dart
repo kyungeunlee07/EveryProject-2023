@@ -16,18 +16,25 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   final _profileRepository = ProfileRepository();
   List<Profile> profile = [];
+  String name = '';
+  String department = '';
+  int sid = 0;
 
-  void loadData() async {
+  void onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
+    var token = prefs.getString('id');
+    print("token: $token");
     if (token == null) return;
-    Map<String, dynamic> user = jsonDecode(token);
-    profile = await _profileRepository.profile(user['values']['id']);
+    profile = await _profileRepository.profile(token);
+
+    name = profile.first.name;
+    department = profile.first.department;
+    sid = profile.first.sid;
   }
 
   @override
   Widget build(BuildContext context) {
-    loadData();
+    onInit();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Column(
@@ -44,14 +51,13 @@ class _MyProfileState extends State<MyProfile> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${profile[0].name}',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('$name', style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 5),
-                  Text('${profile[0].sid}',
+                  Text('$sid',
                       style:
                           TextStyle(color: Color.fromARGB(255, 114, 113, 113))),
                   SizedBox(height: 5),
-                  Text("${profile[0].department}"),
+                  Text("$department"),
                 ],
               )
             ],

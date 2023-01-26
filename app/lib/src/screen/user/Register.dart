@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../repository/user/UserRepository.dart';
 import '../../style/user/TextFormFieldStyle.dart';
 import 'Login.dart';
+import 'dart:convert';
+import 'package:app/src/screen/home.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -31,10 +33,13 @@ class _Register extends State<Register> {
     String department = _departmentController.text;
     String? token = await _userRepository.register(
         id, name, email, password, sid, department);
+    if (token == null) return;
+    Map<String, dynamic> user = jsonDecode(token);
+    prefs.setString("id", user['id']);
     if (token != null) {
       await prefs.setString('token', token);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => Login()));
+          context, MaterialPageRoute(builder: (b) => Home()));
     }
   }
 

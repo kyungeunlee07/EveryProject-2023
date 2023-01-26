@@ -2,8 +2,10 @@ import 'package:app/src/screen/friend/FriendDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import '../../widget/friend/FriendProfile.dart';
 import '../../widget/friend/FriendInfo.dart';
+import '../../model/Friend.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../repository/friend/FriendRepository.dart';
 
 class FriendList extends StatefulWidget {
   const FriendList({super.key});
@@ -13,8 +15,19 @@ class FriendList extends StatefulWidget {
 }
 
 class _FriendListState extends State<FriendList> {
+  final _friendRepository = FriendRepository();
+  List<Friend> friendList = [];
+
+  void onInit() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('id');
+    if (token == null) return;
+    friendList = await _friendRepository.showFriendList(token);
+  }
+
   @override
   Widget build(BuildContext context) {
+    onInit();
     return InkWell(
         onTap: () {
           Navigator.push(
@@ -24,15 +37,16 @@ class _FriendListState extends State<FriendList> {
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 13, horizontal: 12),
-          child: ListView.builder(itemBuilder: ((context, index) {
-            return Container(
-                width: double.infinity,
-                height: 90,
-                child: Column(
+          child: ListView.builder(
+              itemCount: friendList.length,
+              itemBuilder: ((context, index) {
+                return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [FriendInfo()]));
-          })),
+                    children: [
+                      FriendInfo(friendList[index]),
+                    ]);
+              })),
         ));
   }
 }
