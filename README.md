@@ -1,16 +1,18 @@
-# test
+# EveryProject-2023
 
-A new Flutter project.
+## 대학생을 위한 게시판
 
-## Getting Started
+### 1. 기능 소개
+>#### - 익명이 아닌 사용자들이 실명을 이용해 피드를 작성하고, 댓글을 달 수 있음
+>#### - 학과 별로 나누어 게시판에 글을 쓸 수 있음
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### 2. 게시판 소개
+>#### - 학과별 게시판
+>#### - 전체 게시판
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 3. 팀 구성
+>#### - 이경은: @kyungeunlee07
+>#### - 김연진: @homebdy
+>#### - 정한철: @HancheolJeong
