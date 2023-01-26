@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../repository/user/UserRepository.dart';
 import '../../style/user/TextFormFieldStyle.dart';
-import 'package:app/src/screen/home.dart';
+import 'package:app/src/screen/user/Login.dart';
 import '../../controller/UserController.dart';
 import 'package:get/get.dart';
 
-final userController = Get.put(UserController());
+final userConter = Get.put(UserController());
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -35,7 +35,7 @@ class _Register extends State<Register> {
     String? message = await userController.register(
         id, name, email, password, sid, department);
     if (message == null) {
-      Get.off(() => const Home());
+      Get.off(() => const Login());
     } else {
       Get.snackbar("회원가입 에러", message, snackPosition: SnackPosition.BOTTOM);
     }
@@ -65,7 +65,7 @@ class _Register extends State<Register> {
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
                 TextFormField(
                   controller: _idController,
                   validator: (String? value) {
@@ -136,7 +136,7 @@ class _Register extends State<Register> {
                 ElevatedButton(
                   onPressed: _submitButton,
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(400, 50),
+                      fixedSize: const Size(400, 40),
                       backgroundColor: Color.fromARGB(255, 230, 54, 41),
                       elevation: 0,
                       shape: RoundedRectangleBorder(

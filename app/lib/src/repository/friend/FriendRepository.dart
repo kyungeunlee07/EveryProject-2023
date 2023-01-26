@@ -1,5 +1,4 @@
 import 'package:get/get_connect.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../model/Friend.dart';
 import 'package:get/get.dart';
@@ -27,6 +26,7 @@ class FriendRepository extends GetConnect {
       {'id': id},
       headers: {'token': await userController.getToken()},
     );
+    print(response.body);
     return (response.statusCode == 200) ? response.body['values'] : null;
   }
 

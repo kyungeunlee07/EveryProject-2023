@@ -20,7 +20,6 @@ class _Login extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _userRepositort = UserRepository();
 
   void _submitButton() async {
     final prefs = await SharedPreferences.getInstance();

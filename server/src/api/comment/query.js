@@ -1,10 +1,10 @@
 const {pool} = require('../../data')
 
-exports.store = async (id, content) => {
+exports.store = async (board, writer, content) => {
     const query = `INSERT INTO comment
-    (id, content)
-    VALUES (?,?)`;
-    return await pool(query, [id, content]);
+    (board, writer, content)
+    VALUES (?,?,?)`;
+    return await pool(query, [board, writer, content]);
 }
 
 exports.show = async (id) => {
