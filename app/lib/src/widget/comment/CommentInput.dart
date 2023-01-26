@@ -23,7 +23,6 @@ class _CommentInputState extends State<CommentInput> {
     final prefs = await SharedPreferences.getInstance();
     String content = _contentController.text;
     String? message = await commentController.commentCreate(content);
-    print(message);
   }
 
   @override

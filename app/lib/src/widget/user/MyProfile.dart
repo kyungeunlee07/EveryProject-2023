@@ -36,7 +36,6 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
-    onInit();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Column(

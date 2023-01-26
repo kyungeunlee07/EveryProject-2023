@@ -23,6 +23,16 @@ class CommentRepository extends GetConnect {
       {"content": content},
       headers: {'token': await userController.getToken()},
     );
+    print(response.body);
     return (response.statusCode == 200) ? response.body : null;
+  }
+
+  // 댓글 목록 확인
+  Future<List?> showCommentList(int id) async {
+    Response response = await get(
+      '/api/feed/index/1',
+      headers: {'token': await userController.getToken()},
+    );
+    return (response.statusCode == 200) ? response.body['items'] : null;
   }
 }

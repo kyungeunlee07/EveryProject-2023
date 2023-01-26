@@ -79,7 +79,6 @@ class WritingsDetail extends StatelessWidget {
                   height: 10,
                 ),
                 CommentContiner(),
-                SizedBox(height: 220),
                 CommentInput(),
               ],
             )));

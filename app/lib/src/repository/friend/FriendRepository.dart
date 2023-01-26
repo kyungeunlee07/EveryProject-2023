@@ -26,7 +26,6 @@ class FriendRepository extends GetConnect {
       {'id': id},
       headers: {'token': await userController.getToken()},
     );
-    print(response.body);
     return (response.statusCode == 200) ? response.body['values'] : null;
   }
 

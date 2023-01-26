@@ -28,8 +28,6 @@ class UserController extends GetxController {
     Map body = await userRepo.login(email, password);
     if (body['result'] == 'success') {
       prefs.setString('token', body['token']);
-      print(body);
-      print(prefs.getString('token'));
       return null;
     } else {
       return body['result'];
