@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../repository/UserRepository.dart';
+import '../../repository/user/UserRepository.dart';
 import '../../style/user/TextFormFieldStyle.dart';
-import 'Login.dart';
+import 'package:app/src/screen/home.dart';
+import '../../controller/UserController.dart';
+import 'package:get/get.dart';
+
+final userController = Get.put(UserController());
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -19,7 +23,6 @@ class _Register extends State<Register> {
   final _passwordController = TextEditingController();
   final _sidController = TextEditingController();
   final _departmentController = TextEditingController();
-  final _userRepository = UserRepository();
 
   void _submitButton() async {
     final prefs = await SharedPreferences.getInstance();
@@ -29,12 +32,12 @@ class _Register extends State<Register> {
     String password = _passwordController.text;
     String sid = _sidController.text;
     String department = _departmentController.text;
-    String? token = await _userRepository.register(
+    String? message = await userController.register(
         id, name, email, password, sid, department);
-    if (token != null) {
-      await prefs.setString('token', token);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (b) => Login()));
+    if (message == null) {
+      Get.off(() => const Home());
+    } else {
+      Get.snackbar("회원가입 에러", message, snackPosition: SnackPosition.BOTTOM);
     }
   }
 
