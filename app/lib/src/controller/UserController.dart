@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:app/src/repository/user/UserRepository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app/src/token/decodeToken.dart';
 
 class UserController extends GetxController {
   final userRepo = Get.put(UserRepository());
@@ -27,9 +28,8 @@ class UserController extends GetxController {
   Future<String?> login(String email, String password) async {
     final prefs = await SharedPreferences.getInstance();
     Map body = await userRepo.login(email, password);
-    print("body $body");
     if (body['result'] == 'success') {
-      prefs.setString('token', body['values']['id']);
+      prefs.setString('token', body['token']);
       return null;
     } else {
       return body['result'];
