@@ -3,7 +3,7 @@ const {register, login, del, info, show_intro, update_intro} = require('./query'
 const crypto = require('crypto');
 
 exports.info = async (ctx, next) => {
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let item = await info(id);
 
@@ -21,8 +21,7 @@ exports.info = async (ctx, next) => {
 
 //회원가입
 exports.register = async (ctx, next) => {
-    // let token = await generteToken({name : 'my-name'});
-    // ctx.body = token;
+
     let {id, pw, name, sid, department, email} = ctx.request.body;
     let result = await crypto.pbkdf2Sync(pw, process.env.APP_KEY, 50, 100, 'sha512')
 
@@ -30,8 +29,7 @@ exports.register = async (ctx, next) => {
 
     if(affectedRows> 0)
     {
-        let token = await generteToken({name});
-        ctx.body = {result: "success", id: id};
+        ctx.body = {result: "success"};
     }
     else
     {
@@ -53,8 +51,8 @@ exports.login = async (ctx, next) => {
     }
     else
     {
-        let token = {result : "success", values: item};
-        ctx.body = token;
+        let token = await generteToken({id});
+        ctx.body = {result : "success", token : token};
     }
 
 }
@@ -62,7 +60,7 @@ exports.login = async (ctx, next) => {
 //삭제
 exports.del = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let {affectedRows} = await del(id);
 

@@ -37,7 +37,7 @@ exports.check = async (ctx, next) => {
 
 exports.show = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let item = await show(id);
 
@@ -53,7 +53,7 @@ exports.show = async (ctx, next) => {
 
 exports.show_count = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let {id} = ctx.request.id.id;
 
     let item = await show_count(id);
 

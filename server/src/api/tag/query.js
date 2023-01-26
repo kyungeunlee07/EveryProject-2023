@@ -1,7 +1,7 @@
 const {pool} = require('../../data')
 
 
-//친구요청 추가
+//태그 추가
 exports.insert = async (comment_id, friend) => {
     const query = `INSERT INTO tag
     (comment_id, friend)
@@ -18,14 +18,15 @@ exports.show = async(id) => {
     LEFT JOIN (SELECT member.name AS name, comment.id AS id, comment.board AS board, comment.content AS content, comment.writer AS writer FROM comment LEFT JOIN member ON comment.writer = member.id) AS c ON t.comment_id = c.id)
     AS l LEFT JOIN (SELECT member.name AS m_name, board.title AS b_title, board.id AS b_id FROM board LEFT JOIN member ON board.writer = member.id) AS r ON l.board_id = r.b_id`
     let result = await pool(query, [id]);
-    return (result.length == 0)? null : { item : result};
+    return (result.length == 0)? null : result;
 }
 
 // 읽기 않은 태그의 수
 exports.show_count = async(id) => {
     const query = `SELECT COUNT(*) AS cnt FROM tag WHERE friend = ? AND checked = 0 GROUP BY friend`
     let result = await pool(query, [id]);
-    return (result.length == 0)? null : { item : result};
+    console.log(result);
+    return (result.length == 0)? null : result;
 }
 
 // 태그를 확인하면 checked를 0에서 1로 변경한다

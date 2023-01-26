@@ -5,13 +5,14 @@ const crypto = require('crypto');
 //친구 등록
 exports.insert = async (ctx, next) => {
 
-    let {user1_id, user2_id} = ctx.request.body;
+    let id = ctx.request.id.id;
+    let {user_id} = ctx.request.body;
 
-    let {affectedRows} = await insert(user1_id, user2_id);
+    let {affectedRows} = await insert(id, user_id);
 
     if(affectedRows> 0)
     {
-        ctx.body = {result: "success", values: affectedRows};
+        ctx.body = {result: "success"};
     }
     else
     {
@@ -28,7 +29,7 @@ exports.del = async (ctx, next) => {
 
     if(affectedRows> 0)
     {
-        ctx.body = {result: "success", values: affectedRows};
+        ctx.body = {result: "success"};
     }
     else
     {
@@ -39,7 +40,7 @@ exports.del = async (ctx, next) => {
 //친구 목록
 exports.show = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let item = await show(id);
     

@@ -24,9 +24,10 @@ router.get('/page/:page', webController.page);
 /**
  * member, friends, friend_request
  */
-router.post('/api/user', apiUserController.info);
 router.post('/api/user/register', apiUserController.register);
 router.post('/api/user/login', apiUserController.login);
+router.use(verify);
+router.post('/api/user', apiUserController.info);
 router.post('/api/user/delete', apiUserController.del);
 router.post('/api/user/show_intro', apiUserController.show_intro);
 router.post('/api/user/update_intro', apiUserController.update_intro);
@@ -49,7 +50,6 @@ router.post('/file/upload', upload.single('file'), require('./api/file/controlle
 router.get('/file/:id', require('./api/file/controller').download);
 
 
-//router.use(verify);
 router.get('/api/feed', apiFeedController.index);
 router.post('/api/feed', apiFeedController.store);
 router.get('/api/feed/:id', apiFeedController.show);

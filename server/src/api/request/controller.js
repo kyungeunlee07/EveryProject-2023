@@ -5,9 +5,10 @@ const crypto = require('crypto');
 //친구 신청 추가
 exports.insert = async (ctx, next) => {
 
-    let {sender_id, receiver_id} = ctx.request.body;
+    let id = ctx.request.id.id;
+    let {receiver_id} = ctx.request.body;
 
-    let {affectedRows} = await insert(sender_id, receiver_id);
+    let {affectedRows} = await insert(id, receiver_id);
 
     if(affectedRows> 0)
     {
@@ -41,7 +42,7 @@ exports.del = async (ctx, next) => {
 //친구요청 받은 목록
 exports.show_request_received = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let item = await show_request_received(id);
 
@@ -59,7 +60,7 @@ exports.show_request_received = async (ctx, next) => {
 //친구요청 신청 목록
 exports.show_request_sent = async (ctx, next) => {
 
-    let {id} = ctx.request.body;
+    let id = ctx.request.id.id;
 
     let item = await show_request_sent(id);
 
