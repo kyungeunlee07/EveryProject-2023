@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:app/src/model/Friend.dart';
 import 'package:app/src/repository/friend/FriendRepository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FriendController extends GetxController {
   final friendRepo = Get.put(FriendRepository());
@@ -47,9 +48,12 @@ class FriendController extends GetxController {
   //   await feedIndex();
   // }
 
-  // // 친구 삭제
-  // friendDelete(String id) async {
-  //   await friendRepo.deleteFriend(id);
-  //   await feedIndex();
-  // }
+  // 친구 삭제
+  friendDelete(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('id');
+    await friendRepo.deleteFriend(id);
+    if (token == null) return;
+    await friendIndex(token);
+  }
 }

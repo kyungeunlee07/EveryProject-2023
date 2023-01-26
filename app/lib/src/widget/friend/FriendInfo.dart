@@ -1,3 +1,4 @@
+import 'package:app/src/controller/FriendController.dart';
 import 'package:app/src/repository/friend/FriendRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,6 +9,7 @@ import 'FriendButton.dart';
 class FriendInfo extends StatelessWidget {
   FriendModel friend;
   FriendInfo(this.friend, {super.key});
+  final friendController = FriendController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +31,10 @@ class FriendInfo extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("${friend.name}",
+                        Text("@${friend.name}",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         SizedBox(height: 5),
-                        Text("@${friend.id}",
+                        Text("${friend.department}",
                             style: TextStyle(
                                 color: Color.fromARGB(255, 114, 113, 113))),
                         SizedBox(height: 5),
@@ -43,7 +45,38 @@ class FriendInfo extends StatelessWidget {
                 )
               ],
             ),
-            FriendButton(),
+            ElevatedButton.icon(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("친구 삭제"),
+                        content: Text('정말 삭제하시겠습니까?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                {friendController.friendDelete(friend.id)},
+                            child: const Text('OK'),
+                          )
+                        ],
+                      );
+                    });
+              },
+              icon: Icon(Icons.person_remove),
+              label: Text("친구 삭제"),
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(90, 40),
+                backgroundColor: Color.fromARGB(255, 230, 54, 41),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+              ),
+            ),
           ],
         ));
   }

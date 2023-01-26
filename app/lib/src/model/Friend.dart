@@ -1,5 +1,5 @@
 class FriendModel {
-  String? id;
+  late String id;
   String? name;
   int? sid;
   String? department;
