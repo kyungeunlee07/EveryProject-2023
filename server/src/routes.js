@@ -50,7 +50,7 @@ router.post('/file/upload', upload.single('file'), require('./api/file/controlle
 router.get('/file/:id', require('./api/file/controller').download);
 
 
-router.get('/api/feed', apiFeedController.index);
+router.get('/api/feed/index/:id', apiFeedController.index);
 router.post('/api/feed', apiFeedController.store);
 router.get('/api/feed/:id', apiFeedController.show);
 router.put('/api/feed/:id', apiFeedController.update);
@@ -59,8 +59,7 @@ router.delete('/api/feed/:id', apiFeedController.delete);
 
 /**
  * feed, comment
- */
-router.get('/api/comment', apicommentController.index);
+//  */
 router.post('/api/comment', apicommentController.store);
 router.put('/api/comment/:id', apicommentController.update);
 router.delete('/api/comment/:id', apicommentController.delete);
