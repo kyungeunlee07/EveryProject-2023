@@ -21,7 +21,7 @@ class WritingsProfile extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text("글쓴이")
+                  Text("훈민정음")
                 ],
               ),
               SizedBox(
@@ -30,7 +30,7 @@ class WritingsProfile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("글 제목이 들어갈 부분",
+                  Text("훈민정음 혜례본",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               )

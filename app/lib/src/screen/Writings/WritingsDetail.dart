@@ -61,24 +61,16 @@ class WritingsDetail extends StatelessWidget {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
-                Row(
-                  children: [
-                    UpdateButton(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    DeleteButton(),
-                  ],
-                ),
                 Divider(thickness: 2, height: 20, color: Colors.grey),
                 Text(
                   "댓글",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 CommentContiner(),
+                SizedBox(height: 30),
                 CommentInput(),
               ],
             )));
