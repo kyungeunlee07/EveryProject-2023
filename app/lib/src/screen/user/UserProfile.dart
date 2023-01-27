@@ -32,16 +32,16 @@ class UserProfile extends StatelessWidget {
                 SizedBox(height: 20),
                 MyProfile(),
                 SizedBox(height: 20),
-                Divider(thickness: 1, color: Color.fromARGB(255, 230, 54, 41)),
-                SizedBox(height: 10),
-                Text(
-                  "작성글",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                Divider(thickness: 1, color: Color.fromARGB(255, 230, 54, 41)),
-                SizedBox(height: 10),
-                Text("작성글이 들어갈 부분"),
+                // Divider(thickness: 1, color: Color.fromARGB(255, 230, 54, 41)),
+                // SizedBox(height: 10),
+                // Text(
+                //   "작성글",
+                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                // ),
+                // SizedBox(height: 10),
+                // Divider(thickness: 1, color: Color.fromARGB(255, 230, 54, 41)),
+                // SizedBox(height: 10),
+                // Text("작성글이 들어갈 부분"),
               ],
             ))));
   }

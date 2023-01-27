@@ -15,7 +15,6 @@ class ProfileController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     if (token == null) return;
-    print(token);
     Map body = await profileRepo.showMyProfile(token);
     ProfileModel profile = ProfileModel.parse(body['values'][0]);
     profileOne = profile;

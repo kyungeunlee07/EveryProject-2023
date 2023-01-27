@@ -9,8 +9,6 @@ class LoginRepository {
     var response = await http.post(url, body: {
       'id': id,
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
     if (response.statusCode == 200) {
       return response.body;
     } else {
@@ -24,8 +22,6 @@ class LoginRepository {
     var response = await http.post(url, body: {
       'id': id,
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
     if (response.statusCode == 200) {
       return response.body;
     } else {
